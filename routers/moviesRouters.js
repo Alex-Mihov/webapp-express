@@ -10,8 +10,6 @@ const moviesControllers = require("../contollers/moviesContollers")
 router.get("/", moviesControllers.index)
 
 // rotta show
-router.get("/:id", (req, res) => {
-    res.send("rotta show")
-})
+router.get("/:id", moviesControllers.show)
 
 module.exports = router;
