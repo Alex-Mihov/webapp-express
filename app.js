@@ -6,6 +6,12 @@ const moviesRouters = require("./routers/moviesRouters")
 
 const imagePathMiddleware = require("./middleware/imagePath")
 
+// importo il middleware di gestione 404
+const notFound = require("./middleware/notFound")
+
+// importo il middleware di gestione errore server
+const errorsHandler = require("./middleware/errorsHandler")
+
 
 // impostiamo file statici
 app.use(express.static("public"));
@@ -16,6 +22,12 @@ app.use(express.json());
 
 // registro middlware delle img path
 app.use(imagePathMiddleware)
+
+// utilizzo errore notFound 404
+app.use(notFound)
+
+// utilizzo errore di server
+app.use(errorsHandler)
 
 // rotta home 
 app.get("/api", (req, res) => {
