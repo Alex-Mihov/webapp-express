@@ -4,12 +4,18 @@ const port = 3000;
 
 const moviesRouters = require("./routers/moviesRouters")
 
+const imagePathMiddleware = require("./middleware/imagePath")
+
+
+// impostiamo file statici
+app.use(express.static("public"));
 
 // body parser
 app.use(express.json());
 
-// impostiamo file statici
-app.use(express.static("public"));
+
+// registro middlware delle img path
+app.use(imagePathMiddleware)
 
 // rotta home 
 app.get("/api", (req, res) => {

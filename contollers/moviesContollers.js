@@ -11,8 +11,14 @@ function index(req, res) {
     connection.query(mysql, (err, moviesResults) => {
         if (err) return res.status(500).json({ error: "Database query failed" });
 
-        res.json(moviesResults);
-    })
+        // res.json(moviesResults);
+        const movies = moviesResults.map(movie => {
+            return { ...movie, image: req.imagePath + movie.image }
+        })
+
+        res.json(movies);
+    });
+
 }
 
 // funzione show
