@@ -1,12 +1,12 @@
 // Importiamo il modulo mysql2 per interagire con il database MySQL
 const mysql = require("mysql2");
 
-// Creiamo una connessione al database "db_blog" usando le credenziali locali
+// Creiamo una connessione al database usando le credenziali locali
 const connection = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
+    host: process.env.DB_HOST,       // Host del database, preso dalle variabili d'ambiente
+    user: process.env.DB_USER,       // Utente del database, preso dalle variabili d'ambiente
+    password: process.env.DB_PASSWORD, // Password del database, presa dalle variabili d'ambiente
+    database: process.env.DB_NAME    // Nome del database, preso dalle variabili d'ambiente
 });
 
 // Stabilire la connessione con il database

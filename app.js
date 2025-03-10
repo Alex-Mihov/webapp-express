@@ -1,44 +1,46 @@
+// Importa il modulo express
 const express = require("express");
+// Crea un'applicazione express
 const app = express();
+// Imposta la porta su cui il server ascolterà, presa dalle variabili d'ambiente
 const port = process.env.PORT;
 
-const moviesRouters = require("./routers/moviesRouters")
+// Importa il router dei film
+const moviesRouters = require("./routers/moviesRouters");
 
-const imagePathMiddleware = require("./middleware/imagePath")
+// Importa il middleware per il percorso delle immagini
+const imagePathMiddleware = require("./middleware/imagePath");
 
-// importo il middleware di gestione 404
-const notFound = require("./middleware/notFound")
+// Importa il middleware di gestione 404
+const notFound = require("./middleware/notFound");
 
-// importo il middleware di gestione errore server
-const errorsHandler = require("./middleware/errorsHandler")
+// Importa il middleware di gestione degli errori del server
+const errorsHandler = require("./middleware/errorsHandler");
 
-
-// impostiamo file statici
+// Imposta la cartella dei file statici
 app.use(express.static("public"));
 
-// body parser
+// Middleware per il parsing del corpo delle richieste in formato JSON
 app.use(express.json());
 
+// Registra il middleware per il percorso delle immagini
+app.use(imagePathMiddleware);
 
-// registro middlware delle img path
-app.use(imagePathMiddleware)
-
-// utilizzo errore notFound 404
-app.use(notFound)
-
-// utilizzo errore di server
-app.use(errorsHandler)
-
-// rotta home 
+// Definisce la rotta home
 app.get("/api", (req, res) => {
-    res.json("Benvenuto nella rotta principale!")
+    res.json("Benvenuto nella rotta principale!");
 });
 
-// rotta dei film e difianiamo la parte iniziale 
+// Definisce la rotta per i film e imposta il prefisso "/api/movies"
 app.use("/api/movies", moviesRouters);
 
-// avviamo il server e lo mettiamo in ascolto 
+// Middleware per gestire le richieste a pagine non trovate (404)
+app.use(notFound);
+
+// Middleware per gestire gli errori del server
+app.use(errorsHandler);
+
+// Avvia il server e lo mette in ascolto sulla porta specificata
 app.listen(port, () => {
     console.log(`Server avviato e in ascolto sulla porta ${port}`);
-
-})
+});
