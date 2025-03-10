@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
-const moviesRouter = require("./routers/moviesRouters")
+const moviesRouters = require("./routers/moviesRouters")
 
 
 // body parser
@@ -17,7 +17,7 @@ app.get("/api", (req, res) => {
 });
 
 // rotta dei film e difianiamo la parte iniziale 
-app.use("/api/movies", moviesRouter);
+app.use("/api/movies", moviesRouters);
 
 // avviamo il server e lo mettiamo in ascolto 
 app.listen(port, () => {
