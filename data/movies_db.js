@@ -3,10 +3,10 @@ const mysql = require("mysql2");
 
 // Creiamo una connessione al database "db_blog" usando le credenziali locali
 const connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "0175",
-    database: "movies_db"
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
 });
 
 // Stabilire la connessione con il database
