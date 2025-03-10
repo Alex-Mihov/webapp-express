@@ -3,6 +3,12 @@ const app = express();
 const port = 3000;
 
 
+// body parser
+app.use(express.json());
+
+// impostiamo file statici
+app.use(express.static("public"));
+
 // rotta home 
 app.get("/api", (req, res) => {
     res.json("Benvenuto nella rotta principale!")
