@@ -5,6 +5,9 @@ const app = express();
 // Imposta la porta su cui il server ascolterà, presa dalle variabili d'ambiente
 const port = process.env.PORT;
 
+// importiamo cors
+const cors = require("cors");
+
 // Importa il router dei film
 const moviesRouters = require("./routers/moviesRouters");
 
@@ -22,6 +25,9 @@ app.use(express.static("public"));
 
 // Middleware per il parsing del corpo delle richieste in formato JSON
 app.use(express.json());
+
+// middleware per cors
+app.use(cors({ origin: process.env.FE_APP }));
 
 // Registra il middleware per il percorso delle immagini
 app.use(imagePathMiddleware);

@@ -60,6 +60,10 @@ function show(req, res) {
 
             // Aggiunge le recensioni al film
             movie.reviews = reviewResult;
+
+            // aggiunginmo il percorso dell'immagine
+            movie.image = req.imagePath + movie.image;
+
             // Invia il film con le recensioni come risposta JSON
             res.json(movie);
         });
