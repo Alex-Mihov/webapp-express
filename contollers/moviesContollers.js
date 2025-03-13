@@ -70,5 +70,10 @@ function show(req, res) {
     });
 }
 
+// inserimento store
+function store(req, res) {
+
+}
+
 // Esporta le funzioni index e show per essere utilizzate in altre parti dell'applicazione
-module.exports = { index, show };
+module.exports = { index, show, store };
