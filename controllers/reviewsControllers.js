@@ -24,4 +24,4 @@ function storeReview(req, res) {
 }
 
 // Esporta la funzione storeReview
-module.exports = { storeReview }
+module.exports = { storeReview };

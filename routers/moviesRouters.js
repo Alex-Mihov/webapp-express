@@ -5,7 +5,7 @@ const express = require("express");
 const router = express.Router();
 
 // Importa il controller dei film
-const moviesControllers = require("../contollers/moviesContollers");
+const moviesControllers = require("../controllers/moviesControllers");
 
 // Definisce la rotta per l'indice dei film
 // Quando un client fa una richiesta GET a "/", viene chiamato il metodo index del controller dei film

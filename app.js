@@ -11,6 +11,9 @@ const cors = require("cors");
 // Importa il router dei film
 const moviesRouters = require("./routers/moviesRouters");
 
+// Importa il router delle recensioni
+const reviewsRouter = require('./routers/reviewsRouters');
+
 // Importa il middleware per il percorso delle immagini
 const imagePathMiddleware = require("./middleware/imagePath");
 
@@ -39,6 +42,9 @@ app.get("/api", (req, res) => {
 
 // Definisce la rotta per i film e imposta il prefisso "/api/movies"
 app.use("/api/movies", moviesRouters);
+
+// Definisce la rotta per le recensioni e imposta il prefisso "/api"
+app.use('/api', reviewsRouter);
 
 // Middleware per gestire le richieste a pagine non trovate (404)
 app.use(notFound);
