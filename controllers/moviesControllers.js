@@ -70,10 +70,36 @@ function show(req, res) {
     });
 }
 
-// inserimento store
-function store(req, res) {
+// Funzione per gestire l'inserimento di un nuovo film
+function store(req, res, next) {
+    // Estrae i dati del film dal corpo della richiesta
+    const { title, director, abstract } = req.body;
 
+    // Ottiene il nome del file dell'immagine caricata
+    const imageName = `${req.file.filename}`;
+
+    // Query SQL per inserire un nuovo film
+    const newMovieSql = `
+    INSERT INTO movies (title,director,abstract,image)
+    VALUES (?,?,?,?)
+    `;
+
+    // Esegue la query per inserire il nuovo film nel database
+    connection.query(newMovieSql, [title, director, abstract, imageName],
+        (err, result) => {
+            // Gestisce eventuali errori nella query
+            if (err) {
+                console.log(err)
+                return next(new Error("Errore interno al server"))
+            }
+
+            // Invia una risposta di successo
+            res.status(201).json({
+                status: "success",
+                message: "Film creato con successo"
+            })
+        })
 }
 
-// Esporta le funzioni index e show per essere utilizzate in altre parti dell'applicazione
+// Esporta le funzioni index, show e store per essere utilizzate in altre parti dell'applicazione
 module.exports = { index, show, store };
